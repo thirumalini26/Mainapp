@@ -31,6 +31,11 @@ quotes = ['(NIFTY_F1',datetime(2012,01,02,09,16),4638.00,4638.00,4616.05,4626.20
 from matplotlib.dates import date2num
 
 quotes = [(date2num(item[0]),) + item[1:] for item in quotes]
+from tasks import generate_excel
 
+class Test(ListCreateApiView):
+    def list(self, request, *args, **kwargs):
+        generate_excel.delay()
+        return Response()
 
 
