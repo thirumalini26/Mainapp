@@ -32,6 +32,13 @@ from matplotlib.dates import date2num
 
 quotes = [(date2num(item[0]),) + item[1:] for item in quotes]
 from tasks import generate_excel
+from binance import Client
+
+client = Client(api_key = 'Enter Your Key', api_secret = 'Enter Your Secret Key')
+candles = client.get_klines(symbol='BTCUSDT', interval=Client.KLINE_INTERVAL_1MINUTE)
+
+print(candles[-1])
+print(f"\nLength of candles: {len(candles)}")
 
 class Test(ListCreateApiView):
     def list(self, request, *args, **kwargs):
